@@ -1,9 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 html,
 body {
   padding: 0;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+:root {
+  --primary: #;
+  --secondary: #;
+  --tertiary: #;
+  --white: #fff;
+  --gray: rgb(178, 171, 171);
+  --black: #000;
+}
+
+.applyPrim {
+  background-color: var(--primary);
+  color: var(--white);
+}
+
+.applySec {
+  background-color: var(--secondary);
+  color: var(--white);
+}
+
+.applyTert {
+  background-color: var(--tertiary);
+  color: var(--white);
 }
 
 a {
@@ -13,14 +41,4 @@ a {
 
 * {
   box-sizing: border-box;
-}
-
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-  body {
-    color: white;
-    background: black;
-  }
 }

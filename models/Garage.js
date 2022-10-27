@@ -1,0 +1,19 @@
+import mongoose from "mongoose";
+
+const GarageSchema = new mongoose.Schema({
+  name: String,
+  location: String,
+  contact: Number,
+
+  url: [String],
+  products: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Product",
+    },
+  ],
+});
+
+const Garage = mongoose.models.Garage || mongoose.model("Garage", GarageSchema);
+
+export default Garage;
