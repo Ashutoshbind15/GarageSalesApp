@@ -1,4 +1,6 @@
+import Router from "next/router";
 import React from "react";
+import ProductList from "../products/ProductList";
 import Button from "../UI/Button";
 import Card from "../UI/Card";
 
@@ -6,23 +8,22 @@ const GaragePage = ({ _id, name, location, contact, products }) => {
   return (
     <Card className="p-6">
       <div>
-        <h1 className="text-2xl text-center bg-red-400">{name}</h1>
-        <h1 className="text-2xl text-center bg-red-400">{contact}</h1>
-        <h1 className="text-2xl text-center bg-red-400">
+        <h1 className="text-2xl text-center">{name}</h1>
+        <h1 className="text-2xl text-center ">{contact}</h1>
+        <h1 className="text-2xl text-center ">
           {" "}
-          {products ? products.length : "0"}
+          {products ? <ProductList products={products} /> : null}
         </h1>
-        <h1 className="text-2xl text-center bg-red-400">{location}</h1>
-        <h1 className="text-2xl text-center bg-red-400">{_id}</h1>
+        <h1 className="text-2xl text-center ">{location}</h1>
+        <h1 className="text-2xl text-center ">{_id}</h1>
       </div>
 
-      <ul>
-        {products.map((el) => (
-          <li>{el.title}</li>
-        ))}
-      </ul>
-
-      <Button className="bg-pink-500">View all products</Button>
+      <Button
+        className="bg-pink-500"
+        onClick={() => Router.push(`/garages/${_id}/products`)}
+      >
+        View all products
+      </Button>
     </Card>
   );
 };

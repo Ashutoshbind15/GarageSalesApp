@@ -6,6 +6,10 @@ const ProductSchema = new mongoose.Schema({
   quantity: Number,
   url: String,
   selected: Boolean,
+  garage: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Garage",
+  },
 });
 
 const Product =

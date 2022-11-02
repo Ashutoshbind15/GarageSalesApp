@@ -10,11 +10,7 @@ const GarageItem = ({ name, location, contact, id }) => {
         <li>{location}</li>
         <li>{contact}</li>
 
-        <button
-          onClick={() => Router.push(`http://localhost:3000/garages/${id}`)}
-        >
-          Visit
-        </button>
+        <button onClick={() => Router.push(`/garages/${id}`)}>Visit</button>
       </ul>
     </Card>
   );

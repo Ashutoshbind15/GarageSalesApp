@@ -8,7 +8,7 @@ const Navbar = () => {
   const { cartState } = cartCtx;
 
   return (
-    <div className="bg-blue-600 sticky top-0 mb-4 p-4 text-white flex justify-between">
+    <div className="bg-blue-600 sticky top-0 mb-4 p-4 text-white flex justify-between font-bold text-xl">
       <Link href="/">Garage Sales App</Link>
       <Link href="/products/cart">{`Cart ${cartState.amount}`}</Link>
     </div>

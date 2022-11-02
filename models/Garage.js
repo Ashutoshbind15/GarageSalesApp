@@ -12,6 +12,7 @@ const GarageSchema = new mongoose.Schema({
       ref: "Product",
     },
   ],
+  featured: Boolean,
 });
 
 const Garage = mongoose.models.Garage || mongoose.model("Garage", GarageSchema);

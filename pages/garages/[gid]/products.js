@@ -1,6 +1,7 @@
 import connectDB from "../../../utils/db";
 import ProductItem from "../../../components/products/Product";
 import Garage from "../../../models/Garage";
+import Product from "../../../models/Product";
 
 const GPage = ({ products }) => {
   return (
@@ -32,8 +33,6 @@ export async function getStaticPaths() {
     params: { gid: JSON.parse(JSON.stringify(el._id)) },
   }));
 
-  console.log(ids);
-
   return {
     paths: ids,
     fallback: false,
@@ -43,15 +42,14 @@ export async function getStaticPaths() {
 export async function getStaticProps(context) {
   await connectDB();
 
-  console.log("ctx", context);
   const { gid } = context.params;
-  const { products } = await Garage.findById(gid, { products: 1 }).populate(
-    "products"
-  );
-  console.log(gid, products);
+  const grage = await Garage.findById(gid).populate({
+    path: "products",
+    Product,
+  });
 
   return {
-    props: { products: JSON.parse(JSON.stringify(products)) },
+    props: { products: JSON.parse(JSON.stringify(grage.products)) },
     revalidate: 100,
   };
 }

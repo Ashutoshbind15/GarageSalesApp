@@ -1,3 +1,4 @@
+import Router from "next/router";
 import ProductPage from "../../components/products/ProductPage";
 import Product from "../../models/Product";
 import connectDB from "../../utils/db";
@@ -16,6 +17,10 @@ const GPage = ({ product }) => {
             _id={product._id}
             quantity={product.quantity}
           />
+
+          <button onClick={() => Router.push(`/garages/${product.garage}`)}>
+            Garage
+          </button>
         </div>
       )}
     </>
@@ -31,8 +36,6 @@ export async function getStaticPaths() {
     params: { id: JSON.parse(JSON.stringify(el._id)) },
   }));
 
-  console.log(ids);
-
   return {
     paths: ids,
     fallback: false,
@@ -44,7 +47,6 @@ export async function getStaticProps(context) {
 
   const { id } = context.params;
   const product = await Product.findById(id);
-  console.log(id, product);
 
   return {
     props: { product: JSON.parse(JSON.stringify(product)) },

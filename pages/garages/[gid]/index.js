@@ -1,6 +1,7 @@
 import Button from "../../../components/UI/Button";
 import connectDB from "../../../utils/db";
 import ProductItem from "../../../components/products/Product";
+import Product from "../../../models/Product";
 import Garage from "../../../models/Garage";
 import GarageItem from "../../../components/garages/GarageItem";
 import GaragePage from "../../../components/garages/GaragePage";
@@ -35,8 +36,6 @@ export async function getStaticPaths() {
     params: { gid: JSON.parse(JSON.stringify(el._id)) },
   }));
 
-  console.log(ids);
-
   return {
     paths: ids,
     fallback: false,
@@ -46,13 +45,12 @@ export async function getStaticPaths() {
 export async function getStaticProps(context) {
   await connectDB();
 
-  console.log("ctx", context);
-
   const { gid } = context.params;
-
-  const garage = await Garage.findById(gid);
-
-  console.log(gid, garage);
+  const garage = await Garage.findById(gid).populate({
+    path: "products",
+    options: { limit: 2 },
+    Product,
+  });
 
   return {
     props: { garage: JSON.parse(JSON.stringify(garage)) },

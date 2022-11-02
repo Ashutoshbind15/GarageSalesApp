@@ -11,7 +11,6 @@ const handler = async (req, res) => {
 
   if (req.method === "POST") {
     const garage = await Garage.create(req.body);
-    console.log(garage);
     res.status(200).json(garage);
   }
 };
