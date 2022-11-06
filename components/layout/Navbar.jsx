@@ -18,7 +18,7 @@ const Navbar = () => {
     <div className="bg-blue-600 sticky top-0 mb-4 p-4 text-white flex justify-between font-bold text-xl">
       <Link href="/">Garage Sales App</Link>
       <Link href="/products/cart">{`Cart ${cartState.amount}`}</Link>
-      {isAuth && <p> {session.user.username}</p>}
+      {isAuth ? <p> {session.user.name}</p> : null}
     </div>
   );
 };
