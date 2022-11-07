@@ -71,9 +71,7 @@ const ProductPage = ({ products }) => {
             key={prod._id}
             title={prod.title}
             price={prod.price}
-            quantity={prod.quantity}
             _id={prod._id}
-            selected={prod.selected}
           />
         ))}
       </div>

@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useSession } from "next-auth/react";
 import Router from "next/router";
 import React, { useContext, useEffect, useState } from "react";
 import { cartContext } from "../../context/CartContext";
@@ -8,45 +9,46 @@ import Card from "../UI/Card";
 const ProductItem = ({ title, price, _id }) => {
   const cartCtx = useContext(cartContext);
   const { cartActionsDispatch, cartState } = cartCtx;
-  const [isSel, setIsSel] = useState(false);
-  const [inStock, setInStock] = useState(true);
-  const [quantity, setQuantity] = useState(0);
+  const { cart } = cartState;
+
+  const [isSel, setIsSel] = useState(
+    cart.find((el) => el._id === _id) ? true : false
+  );
+
+  useEffect(() => {
+    setIsSel(cart.find((el) => el._id === _id) ? true : false);
+  }, [cart]);
 
   //selected or inclusion in the cart to sync with ctx initially filled in with data from the server
   //fetch quantity from the server here itself to avoid the stale state problem
   //localize the cart State and the quantity state as the crawlers dont need to see them anyway
 
-  useEffect(() => {
-    const helper = async () => {
-      const { data } = await axios.get(
-        `http://localhost:3000/api/products/${_id}`
-      );
-
-      setQuantity(data.quantity);
-      setIsSel(data.selected);
-      if (data.quantity <= 0) setInStock(false);
-    };
-
-    helper();
-  }, []);
+  const { data: session, status } = useSession();
 
   const favToggler = async () => {
     if (!isSel) {
+      await axios.post(`/api/cart`, {
+        userId: session.user.id,
+        productId: _id,
+      });
+
       cartActionsDispatch({
         type: "addItem",
-        payload: { title, price, quantity: quantity - 1, _id },
+        payload: { title, price, _id },
       });
     } else {
       cartActionsDispatch({
         type: "removeItem",
         payload: { _id: _id },
       });
+      await axios.delete(`/api/cart`, {
+        data: {
+          userId: session.user.id,
+          productId: _id,
+        },
+      });
     }
 
-    await axios.put(`http://localhost:3000/api/products/${_id}`, {
-      _id: _id,
-      selected: !isSel,
-    });
     setIsSel((prev) => !prev);
   };
 

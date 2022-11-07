@@ -5,7 +5,6 @@ const ProductSchema = new mongoose.Schema({
   price: Number,
   quantity: Number,
   url: String,
-  selected: Boolean,
   garage: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Garage",

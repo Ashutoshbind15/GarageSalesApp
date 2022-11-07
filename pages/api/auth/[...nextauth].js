@@ -17,9 +17,8 @@ export const authOptions = {
         const isAuth = await bcrypt.compare(password, user.password);
         if (!isAuth) return null;
 
-        console.log("hi", user);
         return {
-          name: user.username,
+          id: user._id,
           role: process.env.ROLE_BASIC,
         };
       },

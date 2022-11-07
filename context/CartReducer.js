@@ -23,6 +23,7 @@ const cartContextReducer = (state, action) => {
       return {
         ...state,
         cart: state.cart.filter((item) => item._id !== action.payload._id),
+        amount: state.amount - 1,
       };
     }
     case "clear": {

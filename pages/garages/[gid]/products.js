@@ -16,7 +16,6 @@ const GPage = ({ products }) => {
               price={el.price}
               quantity={el.quantity}
               _id={el._id}
-              selected={el.selected}
             />
           </div>
         ))}
@@ -43,13 +42,13 @@ export async function getStaticProps(context) {
   await connectDB();
 
   const { gid } = context.params;
-  const grage = await Garage.findById(gid).populate({
+  const garage = await Garage.findById(gid).populate({
     path: "products",
     Product,
   });
 
   return {
-    props: { products: JSON.parse(JSON.stringify(grage.products)) },
+    props: { products: JSON.parse(JSON.stringify(garage.products)) },
     revalidate: 100,
   };
 }

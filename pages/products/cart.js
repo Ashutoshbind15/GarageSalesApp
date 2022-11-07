@@ -1,10 +1,12 @@
+import { unstable_getServerSession } from "next-auth";
 import React, { useContext } from "react";
 import ProductItem from "../../components/products/Product";
 import { cartContext } from "../../context/CartContext";
+import { authOptions } from "../api/auth/[...nextauth]";
 
-const Cart = () => {
+const Cart = ({ session }) => {
   const cartCtx = useContext(cartContext);
-  const { cartState, cartActionsDispatch } = cartCtx;
+  const { cartState } = cartCtx;
 
   return (
     <div>
@@ -13,13 +15,36 @@ const Cart = () => {
           key={el._id}
           title={el.title}
           price={el.price}
-          quantity={el.quantity}
-          selected={true}
           _id={el._id}
         />
       ))}
     </div>
   );
+};
+
+export const getServerSideProps = async (context) => {
+  const session = await unstable_getServerSession(
+    context.req,
+    context.res,
+    authOptions
+  );
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+
+  // const UserCart = Cart.find({ user: session.user.name });
+
+  return {
+    props: {
+      logSession: session,
+    },
+  };
 };
 
 export default Cart;

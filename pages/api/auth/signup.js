@@ -8,14 +8,14 @@ const handler = async (req, res) => {
   if (req.method === "POST") {
     const { password } = req.body;
     const pwd = await bcrypt.hash(password, 12);
-    console.log(pwd);
+
     const user = new User({
       ...req.body,
       password: pwd,
     });
-    console.log(user);
 
     await user.save();
+
     res.status(200).json(user);
   }
 };

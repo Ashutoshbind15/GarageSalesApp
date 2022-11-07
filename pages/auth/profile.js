@@ -1,14 +1,10 @@
 import { unstable_getServerSession } from "next-auth";
 import React from "react";
+import User from "../../models/User";
 import { authOptions } from "../api/auth/[...nextauth]";
 
-const Profile = ({ logSession }) => {
-  return (
-    <div>
-      {logSession.user.name}
-      {logSession.user.role}
-    </div>
-  );
+const Profile = ({ user }) => {
+  return <div>{JSON.stringify(user)}</div>;
 };
 
 export const getServerSideProps = async (context) => {
@@ -17,8 +13,6 @@ export const getServerSideProps = async (context) => {
     context.res,
     authOptions
   );
-
-  console.log(session);
 
   if (!session) {
     return {
@@ -29,9 +23,12 @@ export const getServerSideProps = async (context) => {
     };
   }
 
+  const user = await User.findById(session.user.id).select(
+    "-password -_id -__v"
+  );
   return {
     props: {
-      logSession: session,
+      user: JSON.parse(JSON.stringify(user)),
     },
   };
 };
