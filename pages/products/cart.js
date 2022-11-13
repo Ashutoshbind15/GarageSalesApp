@@ -1,25 +1,33 @@
 import { unstable_getServerSession } from "next-auth";
-import React, { useContext } from "react";
+import React from "react";
 import ProductItem from "../../components/products/Product";
-import { cartContext } from "../../context/CartContext";
+import { useCartQuery } from "../../utils/query/hooks";
 import { authOptions } from "../api/auth/[...nextauth]";
 
-const Cart = ({ session }) => {
-  const cartCtx = useContext(cartContext);
-  const { cartState } = cartCtx;
+const Cart = () => {
+  const { data: cart, error, isError, isLoading } = useCartQuery();
+  let content;
 
-  return (
-    <div>
-      {cartState.cart.map((el) => (
-        <ProductItem
-          key={el._id}
-          title={el.title}
-          price={el.price}
-          _id={el._id}
-        />
-      ))}
-    </div>
-  );
+  if (isLoading) {
+    content = <p>Loadign ...</p>;
+  } else if (isError) {
+    content = <p>{error.message}</p>;
+  } else {
+    content = (
+      <div>
+        {cart?.map((el) => (
+          <ProductItem
+            key={el._id}
+            title={el.title}
+            price={el.price}
+            _id={el._id}
+          />
+        ))}
+      </div>
+    );
+  }
+
+  return content;
 };
 
 export const getServerSideProps = async (context) => {
