@@ -13,9 +13,12 @@ const Navbar = () => {
   const [username, setUsername] = useState("");
 
   useEffect(() => {
-    const helper = async () => {
-      const { data } = await axios.get("/api/auth/me");
-      setUsername(data.username);
+    const helper = () => {
+      axios
+        .get("/api/auth/me")
+        .then((res) => setUsername(res?.username))
+        .catch((e) => console.log(e));
+      // setUsername(data.username);
     };
 
     helper();

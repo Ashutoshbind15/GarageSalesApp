@@ -10,9 +10,13 @@ const CartContextProvider = ({ children }) => {
 
   useEffect(() => {
     const helper = async () => {
-      const { data } = await axios.get("/api/cart");
-      const productsArray = data.map((el) => el.product);
-      setFetch(productsArray);
+      axios
+        .get("/api/cart")
+        .then((res) => {
+          const productsArray = res?.data.map((el) => el.product);
+          setFetch(productsArray);
+        })
+        .catch((e) => console.log(e));
     };
 
     helper();
