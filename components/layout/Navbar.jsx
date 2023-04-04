@@ -9,30 +9,42 @@ const Navbar = () => {
   const cartCtx = useContext(cartContext);
   const isAuth = status === "authenticated";
   const { cartState } = cartCtx;
-
   const [username, setUsername] = useState("");
 
   useEffect(() => {
     const helper = () => {
       axios
         .get("/api/auth/me")
-        .then((res) => setUsername(res?.username))
+        .then((res) => setUsername(res?.data?.username))
         .catch((e) => console.log(e));
-      // setUsername(data.username);
     };
 
     helper();
   }, []);
 
   return (
-    <div className="bg-blue-600 sticky top-0 mb-4 p-4 text-white flex justify-between font-bold text-xl">
-      <Link href="/">Garage Sales App</Link>
+    <div className=" bg-blue-600 sticky w-full top-0 mb-4 p-4 text-white flex font-bold text-xl items-center z-20 px-12">
+      <Link href="/">
+        <div className="flex-1 ">
+          <span className="hover:cursor-pointer uppercase">
+            Garage Sales App
+          </span>
+        </div>
+      </Link>
       {session ? (
-        <Link href="/products/cart">{`Cart ${cartState.amount}`}</Link>
-      ) : (
-        ""
-      )}
-      {isAuth ? <Link href="/auth/profile">{username || "ash"}</Link> : null}
+        <Link href="/products/cart">
+          <div className="mr-4 hover:cursor-pointer">{`Cart ${cartState.amount}`}</div>
+        </Link>
+      ) : null}
+      {isAuth ? (
+        <Link href="/auth/profile">
+          <div className="avatar placeholder hover:cursor-pointer">
+            <div className="bg-neutral-focus text-neutral-content rounded-full w-12 flex items-center justify-center">
+              <span className="text-xl">{username?.toUpperCase()[0]}</span>
+            </div>
+          </div>
+        </Link>
+      ) : null}
     </div>
   );
 };

@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 const AunctionSchema = new mongoose.Schema(
   {
     title: String,
+    location: String,
     aunctioneer: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",

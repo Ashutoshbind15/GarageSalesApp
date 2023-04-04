@@ -7,7 +7,7 @@ import connectDB from "../utils/db";
 export default function Home({ garages, aunctions }) {
   return (
     <div className="text-2xl ">
-      <h1 className="text-pink-700 text-center text-2xl font-bold">
+      <h1 className="text-pink-700 text-center text-3xl my-8 font-bold">
         Welcome to my garage sales app!
       </h1>
       <GarageList garages={garages} />
@@ -19,8 +19,8 @@ export default function Home({ garages, aunctions }) {
 export const getStaticProps = async () => {
   await connectDB();
 
-  const garages = await Garage.find({ featured: true });
-  const aunctions = await Aunction.find({});
+  const garages = await Garage.find({ featured: true }).limit(6);
+  const aunctions = await Aunction.find({}).limit(4);
 
   return {
     props: {

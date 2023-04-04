@@ -4,7 +4,13 @@ import User from "../../models/User";
 import { authOptions } from "../api/auth/[...nextauth]";
 
 const Profile = ({ user }) => {
-  return <div>{JSON.stringify(user)}</div>;
+  return (
+    <div className="avatar placeholder">
+      <div className="bg-neutral-focus text-neutral-content rounded-full w-12 flex items-center justify-center">
+        <span className="text-3xl">{user.username.toUpperCase()[0]}</span>
+      </div>
+    </div>
+  );
 };
 
 export const getServerSideProps = async (context) => {

@@ -1,11 +1,13 @@
 import React from "react";
 import Navbar from "./Navbar";
+import Footer from "./Footer";
 
 const Layout = ({ children }) => {
   return (
-    <div className="bg-white">
+    <div className="bg-white text-black">
       <Navbar />
-      {children}
+      <main className="px-12  min-h-screen">{children}</main>
+      <Footer />
     </div>
   );
 };
