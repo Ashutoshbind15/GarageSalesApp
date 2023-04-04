@@ -4,6 +4,7 @@ const GarageSchema = new mongoose.Schema({
   name: String,
   location: String,
   contact: Number,
+  desc: String,
 
   url: [String],
   products: [

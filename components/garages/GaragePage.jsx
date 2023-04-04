@@ -4,27 +4,40 @@ import ProductList from "../products/ProductList";
 import Button from "../UI/Button";
 import Card from "../UI/Card";
 
-const GaragePage = ({ _id, name, location, contact, products }) => {
+const GaragePage = ({ _id, name, location, contact, products, desc }) => {
   return (
-    <Card className="p-6">
+    <div className="p-6 ">
+      <div className="hero bg-base-200 rounded-lg text-white">
+        <div className="hero-content w-full py-8 flex-col lg:flex-row  lg:justify-around">
+          <div className="flex flex-col">
+            <img
+              src="/images/garage1.jpg"
+              className="max-w-sm rounded-lg shadow-2xl"
+            />
+            <div className="mt-2 flex w-full justify-around">
+              <div>{location}</div>
+              <div>{contact}</div>
+            </div>
+          </div>
+          <div>
+            <h1 className="text-4xl font-bold"> {name} </h1>
+            <p className="py-6">{desc}</p>
+            <button
+              className="btn btn-primary"
+              onClick={() => Router.push(`/garages/${_id}/products`)}
+            >
+              View all products
+            </button>
+          </div>
+        </div>
+      </div>
       <div>
-        <h1 className="text-2xl text-center">{name}</h1>
-        <h1 className="text-2xl text-center ">{contact}</h1>
         <h1 className="text-2xl text-center ">
           {" "}
           {products ? <ProductList products={products} /> : null}
         </h1>
-        <h1 className="text-2xl text-center ">{location}</h1>
-        <h1 className="text-2xl text-center ">{_id}</h1>
       </div>
-
-      <Button
-        className="bg-pink-500"
-        onClick={() => Router.push(`/garages/${_id}/products`)}
-      >
-        View all products
-      </Button>
-    </Card>
+    </div>
   );
 };
 

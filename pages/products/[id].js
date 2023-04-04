@@ -1,12 +1,14 @@
-import Router from "next/router";
+import Router, { useRouter } from "next/router";
 import ProductPage from "../../components/products/ProductPage";
 import Product from "../../models/Product";
 import connectDB from "../../utils/db";
 
 const GPage = ({ product }) => {
+  const router = useRouter();
+
   return (
     <>
-      <div className="my-4 bg-gray-400 flex items-center justify-between "></div>
+      <div className="my-4 bg-gray-400 flex items-center justify-between"></div>
 
       {product && (
         <div className="px-6">
@@ -16,11 +18,8 @@ const GPage = ({ product }) => {
             price={product.price}
             _id={product._id}
             quantity={product.quantity}
+            garage={product.garage}
           />
-
-          <button onClick={() => Router.push(`/garages/${product.garage}`)}>
-            Garage
-          </button>
         </div>
       )}
     </>

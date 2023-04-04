@@ -20,6 +20,7 @@ const GPage = ({ garage }) => {
             contact={garage.contact}
             _id={garage._id}
             products={garage.products}
+            desc={garage.desc}
           />
         </div>
       )}

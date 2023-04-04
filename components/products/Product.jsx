@@ -1,12 +1,14 @@
 import axios from "axios";
 import { useSession } from "next-auth/react";
-import Router from "next/router";
+import Router, { useRouter } from "next/router";
 import React, { useContext, useEffect, useState } from "react";
 import { cartContext } from "../../context/CartContext";
 import Button from "../UI/Button";
 import Card from "../UI/Card";
 
 const ProductItem = ({ title, price, _id }) => {
+  const router = useRouter();
+
   const cartCtx = useContext(cartContext);
   const { cartActionsDispatch, cartState } = cartCtx;
   const { cart } = cartState;
@@ -53,16 +55,25 @@ const ProductItem = ({ title, price, _id }) => {
   };
 
   return (
-    <Card>
-      <h1>{title}</h1>
-      <h1>{price}</h1>
-      <Button onClick={favToggler}>{!isSel ? "Fav" : "remove"}</Button>
-      <Button
-        onClick={() => Router.push(`http://localhost:3000/products/${_id}`)}
-      >
-        View
-      </Button>
-    </Card>
+    <div className="card bg-base-100 text-white my-4">
+      <div className="card-body">
+        <div className="card-title">
+          <h1>{title}</h1>
+        </div>
+        <h1>{price}</h1>
+        <div className="card-actions">
+          <button onClick={favToggler} className="btn btn-primary">
+            {!isSel ? "Fav" : "remove"}
+          </button>
+          <Button
+            onClick={() => router.push(`/products/${_id}`)}
+            className={"btn btn-primary"}
+          >
+            View
+          </Button>
+        </div>
+      </div>
+    </div>
   );
 };
 
