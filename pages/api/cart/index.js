@@ -22,8 +22,6 @@ const handler = async (req, res) => {
   }
 
   if (req.method === "DELETE") {
-    console.log(req.body);
-
     const data = await Cart.deleteOne({
       product: req.body.productId,
       user: req.body.userId,
@@ -38,8 +36,8 @@ const handler = async (req, res) => {
       Product,
     });
 
-    console.log(cartItems);
-    res.status(200).json(cartItems);
+    const tfmd = cartItems.map((el) => el.product);
+    res.status(200).json({ cart: tfmd, amount: tfmd.length });
   }
 };
 

@@ -1,15 +1,17 @@
 import Link from "next/link";
-import React, { useContext, useEffect, useState } from "react";
-import { cartContext } from "../../context/CartContext";
+import React, { useEffect, useState } from "react";
+
 import { useSession } from "next-auth/react";
 import axios from "axios";
+import { useCart } from "../../hooks/queries";
 
 const Navbar = () => {
   const { data: session, status } = useSession();
-  const cartCtx = useContext(cartContext);
+
   const isAuth = status === "authenticated";
-  const { cartState } = cartCtx;
   const [username, setUsername] = useState("");
+
+  const { data: cartState, isLoading } = useCart();
 
   useEffect(() => {
     const helper = () => {
@@ -33,7 +35,7 @@ const Navbar = () => {
       </Link>
       {session ? (
         <Link href="/products/cart">
-          <div className="mr-4 hover:cursor-pointer">{`Cart ${cartState.amount}`}</div>
+          <div className="mr-4 hover:cursor-pointer">{`Cart ${cartState?.amount}`}</div>
         </Link>
       ) : null}
       {isAuth ? (

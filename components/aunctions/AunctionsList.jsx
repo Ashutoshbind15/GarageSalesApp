@@ -4,7 +4,6 @@ import Button from "../UI/Button";
 import Card from "../UI/Card";
 
 const AunctionsList = ({ aunctions }) => {
-  console.log(aunctions);
   const router = useRouter();
 
   return (

@@ -1,23 +1,25 @@
 import { unstable_getServerSession } from "next-auth";
 import React, { useContext } from "react";
 import ProductItem from "../../components/products/Product";
-import { cartContext } from "../../context/CartContext";
+
 import { authOptions } from "../api/auth/[...nextauth]";
+import { useCart } from "../../hooks/queries";
 
 const Cart = ({ session }) => {
-  const cartCtx = useContext(cartContext);
-  const { cartState } = cartCtx;
+  const { data: cartState } = useCart();
 
   return (
     <div>
-      {cartState.cart.map((el) => (
-        <ProductItem
-          key={el._id}
-          title={el.title}
-          price={el.price}
-          _id={el._id}
-        />
-      ))}
+      {cartState?.cart?.map((el) => {
+        return (
+          <ProductItem
+            key={el._id}
+            title={el.title}
+            price={el.price}
+            _id={el._id}
+          />
+        );
+      })}
     </div>
   );
 };

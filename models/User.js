@@ -11,6 +11,12 @@ const UserSchema = new mongoose.Schema({
     ref: "Garage",
   },
   password: String,
+  friends: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
+  ],
 });
 
 const User = mongoose.models.User || mongoose.model("User", UserSchema);
