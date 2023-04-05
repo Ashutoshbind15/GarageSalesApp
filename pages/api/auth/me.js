@@ -21,6 +21,14 @@ const handler = async (req, res) => {
     if (!user) return res.json({ message: "Something went wrong" });
 
     return res.status(201).json(user);
+  } else if (req.method === "PUT") {
+    const { username } = req.body;
+
+    const user = await User.findByIdAndUpdate(session.user.id, req.body, {
+      new: true,
+    }).select("-password");
+    if (!user) return res.json({ message: "Something went wrong" });
+    return res.status(201).json(user);
   }
 };
 

@@ -6,6 +6,15 @@ export const getCartData = async () => {
   return data;
 };
 
+export const getUserData = async () => {
+  const { data } = await axios.get("/api/auth/me");
+  return data;
+};
+
+export const editUserData = async (payload) => {
+  await axios.put("/api/auth/me", payload);
+};
+
 export const postCartData = async (payload) => {
   await axios.post("/api/cart", payload);
 };
