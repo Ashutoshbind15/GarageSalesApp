@@ -35,6 +35,6 @@ export const useUserMutations = () => {
       queryClient.invalidateQueries({ queryKey: ["user"] });
     },
   });
-
+  
   return { editProfileMutation };
 };
