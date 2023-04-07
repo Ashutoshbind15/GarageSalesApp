@@ -25,7 +25,10 @@ const handler = async (req, res) => {
     product.end = b;
     product.currentBid = +currBid;
     product.save();
-    pusher.trigger("auction", "bid", { bid: currBid, userId: req.body.user });
+    pusher.trigger("presence-auction", "bid", {
+      bid: currBid,
+      userId: req.body.user,
+    });
     res.status(200).json({ msg: "success" });
   }
 };

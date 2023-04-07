@@ -12,6 +12,8 @@ const Navbar = () => {
   const { data: cartState, isLoading } = useCart();
   const { data: userData } = useUser();
 
+  console.log(session);
+
   const signoutHandler = () => {
     signOut();
   };

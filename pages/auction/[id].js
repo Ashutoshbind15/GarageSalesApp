@@ -11,9 +11,9 @@ const AuctionPage = () => {
   const [bid, setBid] = useState(null);
   const [bidData, setBidData] = useState(null);
   const [msgIp, setMsgIp] = useState("");
-
   const router = useRouter();
   const { id } = router.query;
+  const [active, setActive] = useState([]);
 
   useEffect(() => {
     if (!router.isReady) return;
@@ -36,6 +36,8 @@ const AuctionPage = () => {
     helper();
   }, [bid, router.isReady]);
 
+  console.log(active);
+
   const sendMsg = async (e) => {
     e.preventDefault();
     await axios.post(`/api/auctionitem/${id}`, {
@@ -50,14 +52,31 @@ const AuctionPage = () => {
   };
 
   useEffect(() => {
-    const chatChannel = pusherClient.subscribe("auction");
-
+    const chatChannel = pusherClient.subscribe("presence-auction");
     chatChannel.bind("bid", (msg) => {
       setBid(msg);
     });
 
+    chatChannel.bind("pusher:subscription_succeeded", (res) => {
+      const t = [];
+      chatChannel.members.each((mem) => t.push(mem));
+      setActive(t);
+    });
+
+    chatChannel.bind("pusher:member_added", (member) => {
+      const t = [];
+      chatChannel.members.each((mem) => t.push(mem));
+      setActive(t);
+    });
+
+    chatChannel.bind("pusher:member_removed", (member) => {
+      const t = [];
+      chatChannel.members.each((mem) => t.push(mem));
+      setActive(t);
+    });
+
     return () => {
-      pusherClient.unsubscribe("auction");
+      pusherClient.unsubscribe("presence-auction");
     };
   }, []);
   return (
@@ -87,6 +106,7 @@ const AuctionPage = () => {
       )}
 
       {bidData?.finish && <div>Winner : {bidData.currBidder}</div>}
+      {JSON.stringify(active)}
     </>
   );
 };
