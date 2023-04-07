@@ -19,6 +19,12 @@ const AunctionSchema = new mongoose.Schema(
         ref: "User",
       },
     ],
+    products: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "AuctionItem",
+      },
+    ],
   },
   { timestamps: true }
 );

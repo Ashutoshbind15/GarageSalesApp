@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { signOut, useSession } from "next-auth/react";
 import axios from "axios";
 import { useCart, useUser } from "../../hooks/queries";
+import dayjs from "dayjs";
 
 const Navbar = () => {
   const { data: session, status } = useSession();

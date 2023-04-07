@@ -4,7 +4,6 @@ import Button from "../UI/Button";
 import Card from "../UI/Card";
 
 const GarageList = ({ garages }) => {
-  console.log(garages);
   const router = useRouter();
 
   return (
