@@ -3,6 +3,7 @@ import React from "react";
 import ProductList from "../products/ProductList";
 import Button from "../UI/Button";
 import Card from "../UI/Card";
+import Image from "next/image";
 
 const GaragePage = ({ _id, name, location, contact, products, desc }) => {
   return (

@@ -5,7 +5,7 @@ const AuctionItem = ({ auction }) => {
     <div>
       {auction.title}
       {auction.products.map((el) => (
-        <div>
+        <div key={Math.random().toString()}>
           <div>{JSON.stringify(el)}</div>
           <div>{el?.product?.title}</div>
           <button className="btn btn-primary btn-ghost">Add</button>
