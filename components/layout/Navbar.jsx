@@ -1,18 +1,13 @@
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
-
+import React from "react";
 import { signOut, useSession } from "next-auth/react";
-import axios from "axios";
 import { useCart, useUser } from "../../hooks/queries";
-import dayjs from "dayjs";
 
 const Navbar = () => {
   const { data: session, status } = useSession();
   const isAuth = status === "authenticated";
   const { data: cartState, isLoading } = useCart();
   const { data: userData } = useUser();
-
-  console.log(session);
 
   const signoutHandler = () => {
     signOut();
@@ -21,11 +16,17 @@ const Navbar = () => {
   return (
     <div className=" bg-blue-600 sticky w-full top-0 mb-4 p-4 text-white flex font-bold text-xl items-center z-20 px-12">
       <Link href="/">
-        <div className="flex-1 ">
+        <div className="flex-1">
           <span className="hover:cursor-pointer uppercase">
             Garage Sales App
           </span>
         </div>
+      </Link>
+      <Link href={"/garages"} className="link mx-2">
+        Garages
+      </Link>
+      <Link href={"/auction"} className="link mx-2">
+        Auctions
       </Link>
       {session ? (
         <>

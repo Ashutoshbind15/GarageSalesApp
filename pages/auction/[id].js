@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-
 import axios from "axios";
 import { useSession } from "next-auth/react";
 import Countdown from "react-countdown";
@@ -14,17 +13,21 @@ const AuctionPage = () => {
   const router = useRouter();
   const { id } = router.query;
   const [active, setActive] = useState([]);
+  const [bidItems, setBidItems] = useState([]);
 
   useEffect(() => {
     if (!router.isReady) return;
     const helper = async () => {
+      const { data: items } = await axios.get(`/api/auction/${id}`);
+      setBidItems(items);
+
       const { data } = await axios.get(`/api/auctionitem/${id}`);
       setBidData(data);
       setBid({ bid: data.currentBid, bidder: data.currBidder });
     };
 
     helper();
-  }, [router.isReady]);
+  }, [router.isReady, id]);
 
   useEffect(() => {
     if (!router.isReady) return;
@@ -34,7 +37,7 @@ const AuctionPage = () => {
     };
 
     helper();
-  }, [bid, router.isReady]);
+  }, [bid, router.isReady, id]);
 
   console.log(active);
 

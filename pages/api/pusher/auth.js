@@ -3,15 +3,12 @@ import { pusher } from "../../../utils/pusher";
 import { authOptions } from "../../api/auth/[...nextauth]";
 
 export default async function handler(req, res) {
-  console.log(req.body);
   // const { socketId, channel_name } = req.body;
   const session = await unstable_getServerSession(req, res, authOptions);
 
   const [socketId, channel_name] = req.body
     .split("&")
     .map((str) => str.split("=")[1]);
-
-  console.log(socketId, channel_name);
 
   if (!session) return res.status(403).json({ msg: "unauth" });
   const { user } = session;
