@@ -11,11 +11,14 @@ const GaragePage = ({ _id, name, location, contact, products, desc }) => {
       <div className="hero bg-base-200 rounded-lg text-white">
         <div className="hero-content w-full py-8 flex-col lg:flex-row  lg:justify-around">
           <div className="flex flex-col">
-            <Image
-              src="/images/garage1.jpg"
-              className="max-w-sm rounded-lg shadow-2xl"
-              alt="g1"
-            />
+            <div className="relative h-32 w-64 md:h-40 md:w-80">
+              <Image
+                src="/images/garage1.jpg"
+                className="rounded-lg shadow-2xl"
+                alt="g1"
+                layout="fill"
+              />
+            </div>
             <div className="mt-2 flex w-full justify-around">
               <div>{location}</div>
               <div>{contact}</div>

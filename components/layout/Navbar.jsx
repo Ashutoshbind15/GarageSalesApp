@@ -9,6 +9,8 @@ const Navbar = () => {
   const { data: cartState, isLoading } = useCart();
   const { data: userData } = useUser();
 
+  console.log(userData);
+
   const signoutHandler = () => {
     signOut();
   };
@@ -22,12 +24,14 @@ const Navbar = () => {
           </span>
         </div>
       </Link>
-      <Link href={"/garages"} className="link mx-2">
-        Garages
-      </Link>
-      <Link href={"/auction"} className="link mx-2">
-        Auctions
-      </Link>
+      <div className=" mx-2">
+        <Link href={"/garages"}>Garages</Link>
+      </div>
+      <div className=" mx-2">
+        <Link href={"/auction"} className="link mx-4">
+          Auctions
+        </Link>
+      </div>
       {session ? (
         <>
           <Link href="/products/cart">

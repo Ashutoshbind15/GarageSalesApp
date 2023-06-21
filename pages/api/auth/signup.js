@@ -7,6 +7,7 @@ const handler = async (req, res) => {
 
   if (req.method === "POST") {
     const { password } = req.body;
+
     const pwd = await bcrypt.hash(password, 12);
 
     const user = new User({
