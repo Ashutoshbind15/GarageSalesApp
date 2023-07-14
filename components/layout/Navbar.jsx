@@ -35,7 +35,7 @@ const Navbar = () => {
       {session ? (
         <>
           <Link href="/products/cart">
-            <div className="mr-4 hover:cursor-pointer">{`Cart ${cartState?.amount}`}</div>
+            <div className="mr-4 hover:cursor-pointer">{`Fav ${cartState?.amount}`}</div>
           </Link>
 
           <div className="mr-4 hover:cursor-pointer" onClick={signoutHandler}>

@@ -6,10 +6,12 @@ const UserSchema = new mongoose.Schema({
   email: String,
   role: Number,
   selected: Boolean,
-  garage: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Garage",
-  },
+  garages: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Garage",
+    },
+  ],
   password: String,
   friends: [
     {

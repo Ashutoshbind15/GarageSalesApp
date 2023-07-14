@@ -14,6 +14,10 @@ const GarageSchema = new mongoose.Schema({
     },
   ],
   featured: Boolean,
+  owner: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+  },
 });
 
 const Garage = mongoose.models.Garage || mongoose.model("Garage", GarageSchema);

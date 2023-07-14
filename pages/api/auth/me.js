@@ -17,7 +17,9 @@ const handler = async (req, res) => {
   await connectDB();
 
   if (req.method === "GET") {
-    const user = await User.findById(session.user.id).select("-password");
+    const user = await User.findById(session.user.id)
+      .populate({ path: "garages", select: "name location contact desc _id" })
+      .select("-password");
     if (!user) return res.json({ message: "Something went wrong" });
 
     return res.status(201).json(user);

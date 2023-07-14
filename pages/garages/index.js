@@ -7,7 +7,7 @@ import GarageItem from "../../components/garages/GarageItem";
 const ProductPage = ({ garages }) => {
   return (
     <>
-      <div className="my-4 bg-gray-400 flex items-center justify-between "></div>
+      <div className="my-4 bg-gray-400 flex items-center justify-between"></div>
 
       <div className="px-6">
         {garages.map((gar) => (

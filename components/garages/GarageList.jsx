@@ -31,13 +31,6 @@ const GarageList = ({ garages }) => {
           );
         })}
       </div>
-
-      <button
-        onClick={() => Router.push("/garages")}
-        className="btn btn-primary w-4/5 my-4"
-      >
-        View all garages
-      </button>
     </div>
   );
 };
