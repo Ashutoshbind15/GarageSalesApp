@@ -18,6 +18,12 @@ const GarageSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
   },
+  auctions: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
+  ],
 });
 
 const Garage = mongoose.models.Garage || mongoose.model("Garage", GarageSchema);

@@ -1,6 +1,5 @@
 import AuctionItem from "../../../../models/AuctionItem";
 import Aunction from "../../../../models/Aunction";
-import Product from "../../../../models/Product";
 import connectDB from "../../../../utils/db";
 
 const handler = async (req, res) => {
@@ -13,6 +12,8 @@ const handler = async (req, res) => {
       path: "products",
       model: AuctionItem,
     });
+
+    console.log(auction);
     res.status(200).json(auction);
   }
 };

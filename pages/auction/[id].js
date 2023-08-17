@@ -18,39 +18,26 @@ const AuctionPage = () => {
   useEffect(() => {
     if (!router.isReady) return;
     const helper = async () => {
-      const { data: items } = await axios.get(`/api/auction/${id}`);
-      setBidItems(items);
-
-      const { data } = await axios.get(`/api/auctionitem/${id}`);
-      setBidData(data);
-      setBid({ bid: data.currentBid, bidder: data.currBidder });
+      const { data: auction } = await axios.get(`/api/aunctions/${id}`);
+      setBidItems(auction.products);
+      setBidData(auction.products[0]);
+      console.log(auction);
+      setBid({ bid: bidData?.currentBid, bidder: bidData?.currBidder });
     };
 
     helper();
   }, [router.isReady, id]);
 
-  useEffect(() => {
-    if (!router.isReady) return;
-    const helper = async () => {
-      const { data } = await axios.get(`/api/auctionitem/${id}`);
-      setBidData(data);
-    };
-
-    helper();
-  }, [bid, router.isReady, id]);
-
-  console.log(active);
-
   const sendMsg = async (e) => {
     e.preventDefault();
-    await axios.post(`/api/auctionitem/${id}`, {
+    await axios.post(`/api/auctionitem/${bidData?._id}`, {
       bid: msgIp,
       user: session?.user?.id,
     });
   };
 
   const auctionEndHandler = async () => {
-    const { data } = await axios.post(`/api/auctionitem/${id}/finish`);
+    const { data } = await axios.post(`/api/auctionitem/${bidData._id}/finish`);
     setBidData(data);
   };
 
@@ -86,30 +73,54 @@ const AuctionPage = () => {
     <>
       <div>
         {JSON.stringify(bidData)} <br />
-        {JSON.stringify(bid)} <br />
+        {/* {JSON.stringify(bid)} <br /> */}
+        {/* style the countdown suggest classes in tailwind */}
+      </div>
+
+      <div className="shadow-md rounded-md px-4 py-2 bg-slate-800 text-white font-semibold">
+        Bidder : {bid?.userId} <br />
+        Bid : {bid?.bid} <br />
+      </div>
+
+      <div className="flex items-center">
+        <div className="mr-2 font-semibold text-red-400">Time Left for end</div>
         {bidData && !bidData.finish && (
           <Countdown
             date={new Date(bidData?.end).getTime()}
             onComplete={auctionEndHandler}
+            className="text-2xl text-red-600 font-semibold text-center"
           />
         )}
       </div>
-
       {!bidData?.finish && (
-        <form action="" onSubmit={sendMsg}>
-          <input
-            type="text"
-            name=""
-            id=""
-            value={msgIp}
-            onChange={(e) => setMsgIp(e.target.value)}
-          />
-          <button className="btn btn-ghost">Submit</button>
+        <form
+          action=""
+          onSubmit={sendMsg}
+          className="flex flex-col text-center"
+        >
+          {/* heading text classnames give  */}
+          <div className="my-4 text-xl text-purple-800 font-bold">
+            Send a bid!
+          </div>
+          <div className="flex items-center justify-center mb-4">
+            <input
+              type="text"
+              name=""
+              id=""
+              value={msgIp}
+              onChange={(e) => setMsgIp(e.target.value)}
+              className="border-2 border-gray-500 rounded-md px-4 py-2 mr-4 text-white"
+            />
+            <button className="btn btn-primary">Submit</button>
+          </div>
         </form>
       )}
 
       {bidData?.finish && <div>Winner : {bidData.currBidder}</div>}
-      {JSON.stringify(active)}
+      {/* {JSON.stringify(active)} */}
+      <div className="text-green-600 font-semibold text-center">
+        Members online : {active.length}
+      </div>
     </>
   );
 };

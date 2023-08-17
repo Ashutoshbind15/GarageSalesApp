@@ -9,8 +9,6 @@ const Navbar = () => {
   const { data: cartState, isLoading } = useCart();
   const { data: userData } = useUser();
 
-  console.log(userData);
-
   const signoutHandler = () => {
     signOut();
   };
