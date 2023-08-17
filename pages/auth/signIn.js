@@ -57,7 +57,7 @@ const SignIn = () => {
             </button>
             <button
               type="button"
-              className="btn text-center bg-primary mt-4 w-2/5"
+              className="btn text-center bg-green-600 mt-4 w-2/5"
               onClick={() => setSignup((prev) => !prev)}
             >
               Toggle
@@ -151,7 +151,7 @@ const SignIn = () => {
             </button>
             <button
               type="button"
-              className="btn text-center bg-primary mt-4 w-2/5"
+              className="btn text-center bg-green-600 mt-4 w-2/5"
               onClick={() => setSignup((prev) => !prev)}
             >
               Toggle

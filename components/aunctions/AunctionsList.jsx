@@ -3,7 +3,7 @@ import React from "react";
 import Button from "../UI/Button";
 import Card from "../UI/Card";
 
-const AunctionsList = ({ aunctions }) => {
+const AunctionsList = ({ aunctions, hide = false }) => {
   const router = useRouter();
 
   return (
@@ -21,7 +21,7 @@ const AunctionsList = ({ aunctions }) => {
                 <div className="card-actions justify-end">
                   <button
                     className="btn btn-primary"
-                    onClick={() => router.push(`/aunctions/${el._id}`)}
+                    onClick={() => router.push(`/auction/${el._id}`)}
                   >
                     Visit
                   </button>
@@ -32,12 +32,14 @@ const AunctionsList = ({ aunctions }) => {
         })}
       </div>
 
-      <button
-        onClick={() => Router.push("/aunctions")}
-        className="btn btn-primary w-4/5 my-4"
-      >
-        All Aunctions
-      </button>
+      {!hide && (
+        <button
+          onClick={() => Router.push("/auction")}
+          className="btn btn-primary w-4/5 my-4"
+        >
+          All Aunctions
+        </button>
+      )}
     </div>
   );
 };

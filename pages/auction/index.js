@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import AuctionItem from "../../components/auctions/AuctionItem";
 import { Form, Formik } from "formik";
+import AunctionsList from "../../components/aunctions/AunctionsList";
 
 const AllAuctions = () => {
   const [data, setData] = useState([]);
@@ -18,10 +19,8 @@ const AllAuctions = () => {
 
   return (
     <div>
-      {JSON.stringify(data)}
-      {data.map((el) => (
-        <AuctionItem auction={el} key={el._id} />
-      ))}
+      {/* {JSON.stringify(data)} */}
+      <AunctionsList hide={true} aunctions={data} />
     </div>
   );
 };

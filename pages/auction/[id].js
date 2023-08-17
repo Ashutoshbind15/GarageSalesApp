@@ -4,6 +4,7 @@ import { useSession } from "next-auth/react";
 import Countdown from "react-countdown";
 import { useRouter } from "next/router";
 import { pusherClient } from "../../utils/pusher";
+import Image from "next/image";
 
 const AuctionPage = () => {
   const { data: session } = useSession();
@@ -71,8 +72,25 @@ const AuctionPage = () => {
   }, []);
   return (
     <>
-      <div>
-        {JSON.stringify(bidData)} <br />
+      <div className="flex">
+        <div className="rounded-lg">
+          <Image src={"/images/ganna.jpg"} alt="" height={350} width={700} />
+        </div>
+        <div className="flex flex-col justify-center items-end w-3/5 mr-12">
+          <div className="flex flex-col mb-2 font-semibold font-mono text-lg">
+            Name: Sugarcane
+          </div>
+          <div className="flex flex-col mb-2 font-semibold font-mono text-lg">
+            Base Price: 100
+          </div>
+          <div className="flex flex-col mb-2 font-semibold font-mono text-lg">
+            Quantity: 10
+          </div>
+          <div className="flex flex-col mb-2 font-semibold font-mono text-lg">
+            Seller: Arun
+          </div>
+        </div>
+        {/* {JSON.stringify(bidData)} <br /> */}
         {/* {JSON.stringify(bid)} <br /> */}
         {/* style the countdown suggest classes in tailwind */}
       </div>
@@ -82,7 +100,7 @@ const AuctionPage = () => {
         Bid : {bid?.bid} <br />
       </div>
 
-      <div className="flex items-center">
+      <div className="flex items-center text-center w-full justify-center my-4">
         <div className="mr-2 font-semibold text-red-400">Time Left for end</div>
         {bidData && !bidData.finish && (
           <Countdown

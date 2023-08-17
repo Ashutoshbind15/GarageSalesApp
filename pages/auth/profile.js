@@ -75,7 +75,7 @@ const Profile = () => {
       </div>
 
       <h1 className="text-xl text-secondary font-bold text-center mt-4">
-        My Garages
+        My Farms
       </h1>
       <div className="my-4">
         <GarageList garages={user?.garages} />

@@ -13,7 +13,7 @@ const GaragePage = ({ _id, name, location, contact, products, desc }) => {
           <div className="flex flex-col">
             <div className="relative h-32 w-64 md:h-40 md:w-80">
               <Image
-                src="/images/garage1.jpg"
+                src="/images/farm.jpg"
                 className="rounded-lg shadow-2xl"
                 alt="g1"
                 layout="fill"

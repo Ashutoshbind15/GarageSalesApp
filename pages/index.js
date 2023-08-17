@@ -11,10 +11,10 @@ export default function Home({ garages, aunctions }) {
   return (
     <div className="text-2xl">
       <h1 className="text-pink-700 text-center text-3xl my-8 font-bold">
-        Welcome to my garage sales app!
+        Welcome to AgroInnoNest app!
       </h1>
       <h1 className="text-pink-700 text-center text-3xl my-8 font-bold">
-        Featured garages!
+        Featured farms!
       </h1>
       <div className="flex flex-col">
         <GarageList garages={garages} />
@@ -22,7 +22,7 @@ export default function Home({ garages, aunctions }) {
           onClick={() => router.push("/garages")}
           className="btn btn-primary w-4/5 my-4 self-center"
         >
-          View all garages
+          View all farms
         </button>
       </div>
       <h1 className="text-pink-700 text-center text-3xl my-8 font-bold">

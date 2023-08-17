@@ -14,16 +14,14 @@ const Navbar = () => {
   };
 
   return (
-    <div className=" bg-blue-600 sticky w-full top-0 mb-4 p-4 text-white flex font-bold text-xl items-center z-20 px-12">
+    <div className=" bg-green-600 sticky w-full top-0 mb-4 p-4 text-white flex font-bold text-xl items-center z-20 px-12">
       <Link href="/">
         <div className="flex-1">
-          <span className="hover:cursor-pointer uppercase">
-            Garage Sales App
-          </span>
+          <span className="hover:cursor-pointer uppercase">AgroInnoNest</span>
         </div>
       </Link>
       <div className=" mx-2">
-        <Link href={"/garages"}>Garages</Link>
+        <Link href={"/garages"}>Farms</Link>
       </div>
       <div className=" mx-2">
         <Link href={"/auction"} className="link mx-4">
